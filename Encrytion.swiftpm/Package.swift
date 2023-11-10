@@ -20,7 +20,7 @@ let package = Package(
             teamIdentifier: "M3PPT883FZ",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .smiley),
+            appIcon: .placeholder(icon: .cloud),
             accentColor: .presetColor(.indigo),
             supportedDeviceFamilies: [
                 .pad,

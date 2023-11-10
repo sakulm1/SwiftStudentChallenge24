@@ -18,27 +18,32 @@ struct CaesarView: View {
     var body: some View {
         VStack {
             VStack{
-                Text(String(settings.CaesersShift))
+                Text(String(settings.CaesersShift == 26 ? 0 : settings.CaesersShift))
                     .font(.title)
+                    .onChange(of: settings.CaesersShift){
+                        encrypted = encrypter.encrypt(text: text, shift: settings.CaesersShift)
+                    }
                 Text("Caesar Cipher")
                     .font(.largeTitle)
                 disk
             }
             
             Spacer()
-            Text("Hello, world! This is the CaesarView")
-                .controlSize(.large)
-            Text(encrypted ?? "")
+            HStack{
+                Text("Encryptet text: ")
+                    .controlSize(.large)
+                Text(encrypted ?? "")
+                    .foregroundStyle(.blue)
+            }
             HStack{
                 TextField("Input", text: $text)
                     .disableAutocorrection(true)
                     .border(.secondary)
-                Button("Encrypt"){
-                    encrypted = encrypter.encrypt(text: text, shift: settings.CaesersShift)
-                }
+                    .onSubmit {
+                        encrypted = encrypter.encrypt(text: text, shift: settings.CaesersShift)
+                    }
             }.padding(50)
             Spacer()
-            
         }
     }
 }
