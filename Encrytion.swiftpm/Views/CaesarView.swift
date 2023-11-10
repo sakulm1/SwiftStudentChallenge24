@@ -32,6 +32,9 @@ struct CaesarView: View {
                 TextField("Input", text: $text)
                     .disableAutocorrection(true)
                     .border(.secondary)
+                    .onChange(of: encrypted){ newValue in
+                        encrypted = encrypter.encrypt(text: text, shift: settings.CaesersShift)
+                        }
                 Button("Encrypt"){
                     encrypted = encrypter.encrypt(text: text, shift: settings.CaesersShift)
                 }

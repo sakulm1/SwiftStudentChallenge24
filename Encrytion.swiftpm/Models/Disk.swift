@@ -17,8 +17,8 @@ struct Disk: View {
 
     var body: some View {
         ZStack{
-            caesarDisk(offset: -350, cOffset: 50, turning: false)
-            caesarDisk(offset: -290, cOffset: 100, turning: true)
+            caesarDisk(offset: -350, cOffset: 50, turning: false) // Generiert den Äußeren Kreis
+            caesarDisk(offset: -290, cOffset: 100, turning: true) // Generiert den Inneren Kreis
         }
     }
     
@@ -26,9 +26,8 @@ struct Disk: View {
     var rotation: some Gesture {
             RotateGesture()
                 .onChanged { value in
-                    //angle = value.rotation
                     let currentChar = value.rotation / 13.8461538
-                    settings.CaesersShift = (Int(currentChar.degrees) * -1)
+                    settings.CaesersShift = Int(currentChar.degrees).signum() == 1 ? Int(currentChar.degrees) : Int(currentChar.degrees) + 26
                     angle = Angle(degrees: Double(Int(currentChar.degrees)) * 13.8461538)
                 }
         }
