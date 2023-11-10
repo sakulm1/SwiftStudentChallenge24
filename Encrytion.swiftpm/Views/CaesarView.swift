@@ -27,6 +27,9 @@ struct CaesarView: View {
                     .font(.largeTitle)
                 disk
             }
+            .onAppear(){
+                encrypted = encrypter.encrypt(text: text, shift: settings.CaesersShift)
+            }
             
             Spacer()
             HStack{
@@ -47,3 +50,5 @@ struct CaesarView: View {
         }
     }
 }
+
+

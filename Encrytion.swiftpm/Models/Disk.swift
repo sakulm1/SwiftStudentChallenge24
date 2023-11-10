@@ -24,18 +24,23 @@ struct Disk: View {
     
     @available(iOS 17.0, *)
     var rotation: some Gesture {
-            RotateGesture()
+        RotateGesture()
                 .onChanged { value in
                     //angle = value.rotation
                     let currentChar = value.rotation / 13.8461538
-
-                    print(Int(currentChar.degrees))
-                    
                     settings.CaesersShift = Int(currentChar.degrees).signum() == 1 ? Int(currentChar.degrees) : Int(currentChar.degrees) + 26
-
                     angle = Angle(degrees: Double(Int(currentChar.degrees)) * 13.8461538)
                 }
         }
+    
+    func getArror(midY: Double, midX: Double) -> some View{
+        return AnyView(
+            CurvedLine(from: CGPoint(x: midX / 2 + 200, y: midY / 2 + 100),
+                       to: CGPoint(x: midX / 2 - 150, y: midY / 2 + 100),
+                       control: CGPoint(x: midX / 2, y: midY / 2 + 235))
+                        .stroke(Color.blue, lineWidth: 4)
+        )
+    }
     
     
     @available(iOS 17.0, *)
@@ -52,12 +57,9 @@ struct Disk: View {
                     .fill(.white)
                     .frame(width: radius - 250, height: radius - 250)
                     .opacity(turning ? 0 : 1)
-                
-                CurvedLine(from: CGPoint(x: 50, y: 50),
-                                       to: CGPoint(x: 300, y: 300),
-                                       control: CGPoint(x: 50, y: 300))
-                                .stroke(Color.blue, lineWidth: 4)
-                    
+//                GeometryReader { geometry in
+//                    getArror(midY: geometry.size.height, midX: geometry.size.width)
+//                }
                            
                 ForEach(0..<26) { index in
                     let angle = Angle(degrees: Double(index) * (360 / Double(alphabet.count)))
@@ -105,5 +107,10 @@ struct CurvedLine: Shape {
         
         return path
     }
+}
+
+@available(iOS 17.0, *)
+#Preview("Disk") {
+    Disk()
 }
 
