@@ -28,7 +28,20 @@ struct Disk: View {
             RotateGesture()
                 .onChanged { value in
                     let currentChar = value.rotation / 13.8461538
-                    settings.CaesersShift = Int(currentChar.degrees).signum() == 1 ? Int(currentChar.degrees) : Int(currentChar.degrees) + 26
+                    print(currentChar.degrees)
+                    
+                    switch Int(currentChar.degrees).signum() {
+                    case 0:
+                        settings.CaesersShift = Int(currentChar.degrees)
+                    case 1:
+                        settings.CaesersShift = Int(currentChar.degrees)
+                    case -1:
+                        settings.CaesersShift = Int(currentChar.degrees) * -1
+                    default:
+                        settings.CaesersShift = 0
+                    }
+                    
+                    //settings.CaesersShift = Int(currentChar.degrees).signum() == 1 ? Int(currentChar.degrees) : Int(currentChar.degrees) + 26
                     angle = Angle(degrees: Double(Int(currentChar.degrees)) * 13.8461538)
                 }
         }
@@ -50,8 +63,8 @@ struct Disk: View {
                         .offset(y: CGFloat(offset)) // Positioniert den Buchstaben auf dem Rand des Kreises
                         .rotationEffect(angle) // Rotiert den Buchstaben um den Kreis
                 }
-//                Circle()
-//                    .padding(410)
+                Circle()
+                    .padding(410)
             }
                 .rotationEffect(turning == true ? angle : Angle(degrees: 0.0))
                 .gesture(rotation)

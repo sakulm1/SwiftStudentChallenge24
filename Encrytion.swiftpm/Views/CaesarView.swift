@@ -19,6 +19,7 @@ struct CaesarView: View {
         VStack {
             VStack{
                 Text(String(settings.CaesersShift))
+                    .font(.title)
                 Text("Caesar Cipher")
                     .font(.largeTitle)
                 disk
