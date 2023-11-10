@@ -19,6 +19,7 @@ struct Disk: View {
         ZStack{
             caesarDisk(offset: -350, cOffset: 50, turning: false) // Generiert den Äußeren Kreis
             caesarDisk(offset: -290, cOffset: 100, turning: true) // Generiert den Inneren Kreis
+                .shadow(radius: 10)
         }
     }
     
@@ -49,8 +50,8 @@ struct Disk: View {
                         .offset(y: CGFloat(offset)) // Positioniert den Buchstaben auf dem Rand des Kreises
                         .rotationEffect(angle) // Rotiert den Buchstaben um den Kreis
                 }
-                Circle()
-                    .padding(410)
+//                Circle()
+//                    .padding(410)
             }
                 .rotationEffect(turning == true ? angle : Angle(degrees: 0.0))
                 .gesture(rotation)
