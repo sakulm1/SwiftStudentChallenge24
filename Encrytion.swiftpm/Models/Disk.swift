@@ -27,8 +27,10 @@ struct Disk: View {
         RotateGesture()
                 .onChanged { value in
                     //angle = value.rotation
+                    
                     let currentChar = value.rotation / 13.8461538
                     settings.CaesersShift = Int(currentChar.degrees).signum() == 1 ? Int(currentChar.degrees) : Int(currentChar.degrees) + 26
+                    angle = (currentChar.degrees) == 0 ? Angle(degrees: 0.0) : angle
                     angle = Angle(degrees: Double(Int(currentChar.degrees)) * 13.8461538)
                 }
         }
@@ -57,9 +59,12 @@ struct Disk: View {
                     .fill(.white)
                     .frame(width: radius - 250, height: radius - 250)
                     .opacity(turning ? 0 : 1)
-//                GeometryReader { geometry in
-//                    getArror(midY: geometry.size.height, midX: geometry.size.width)
-//                }
+                
+                Image(systemName: "arrow.clockwise")
+                    .font(.system(size: 72))
+                    .opacity(turning ? 0 : 1 )
+
+
                            
                 ForEach(0..<26) { index in
                     let angle = Angle(degrees: Double(index) * (360 / Double(alphabet.count)))
