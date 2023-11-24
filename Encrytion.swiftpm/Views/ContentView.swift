@@ -5,29 +5,28 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var settings: Settings
     var body: some View {
-//        NavigationStack{
-//            VStack {
-//                NavigationLink(destination: CaesarView(text: "")) {
-//                    Text("Caesar")
-//                        .frame(width: 140)
-//                        .controlSize(.large)
-//                        .padding()
-//                        .background(Capsule().foregroundColor(.blue))
-//                        .foregroundColor(.white)
-//                }
-//            }
-//        }
-        NavigationSplitView {
-                    Text("Sidebar")
-                } content: {
-                    Text("Primary View")
-                    List{
-                        NavigationLink(destination: CaesarView(text: "")){
+                NavigationStack{
+                    VStack {
+                        NavigationLink(destination: CaesarView(text: "")) {
                             Text("Caesar")
+                                .frame(width: 140)
+                                .controlSize(.large)
+                                .padding()
+                                .background(Capsule().foregroundColor(.blue))
+                                .foregroundColor(.white)
                         }
                     }
-                } detail: {
-                    Text("Detail View")
                 }
+        
+//        TabView { //pls kill me
+//            CaesarView(text: "")
+//                .tabItem {
+//                    Label("Database", systemImage: "externaldrive")
+//                }
+//            CaesarView(text: "")
+//                .tabItem {
+//                    Label("Database", systemImage: "externaldrive")
+//                }
+//        }
     }
 }
