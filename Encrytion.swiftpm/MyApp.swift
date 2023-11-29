@@ -7,6 +7,7 @@ struct MyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(settings)
             //CaesarView(text: "Hello WWDC")
                 //.environmentObject(settings)
         }

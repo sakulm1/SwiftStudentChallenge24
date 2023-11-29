@@ -37,6 +37,7 @@ struct CaesarView: View {
                     .controlSize(.large)
                 Text(encrypted ?? "")
                     .foregroundStyle(.blue)
+                    .controlSize(.large)
             }
             HStack{
                 TextField("Input", text: $text)
